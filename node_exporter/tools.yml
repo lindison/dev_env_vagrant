@@ -1,8 +1,8 @@
 ---
-- hosts: vagrant
-  remote_user: vagrant
+- hosts: ubuntu
+  remote_user: ubuntu
   become: yes
-  become_method: sudo 
+  become_method: sudo
   gather_facts: no
 
   tasks:
