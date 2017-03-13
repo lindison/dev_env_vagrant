@@ -2,6 +2,13 @@
 # Githash endpoint
 git.properties
 
+# vagrant directories
+*.vagrant/
+
+# Keys
+id_rsa
+id_rsa.pub
+
 # Operating System Files
 
 *.DS_Store
