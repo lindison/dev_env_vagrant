@@ -1,0 +1,81 @@
+---
+- hosts: vagrant
+  remote_user: vagrant
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: download node_exporter
+    get_url:
+          url: https://github.com/prometheus/node_exporter/releases/download/0.11.0/node_exporter-0.11.0.linux-amd64.tar.gz
+          dest: /home/vagrant/
+          mode: 655
+  - name: unpack node_exporter
+    unarchive:
+          src: /home/vagrant/node_exporter-0.11.0.linux-amd64.tar.gz
+          dest: /usr/local/bin/
+          remote_src: yes
+  - name: create node_exporter init service
+    copy:
+          src: /home/vagrant/node_exporter/service.conf
+          dest: /etc/init/node_exporter.conf
+          owner: root
+          group: root
+          mode: 0644
+  - name: start node_exporter service
+    service:
+          name: node_exporter
+          state: started
+
+  - name: Ensure TCP 9100 is open to receive
+    shell: iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 9100  -j ACCEPT
+
+  - name: download alert_manager
+    get_url:
+          url: https://github.com/prometheus/alertmanager/releases/download/v0.5.1/alertmanager-0.5.1.linux-amd64.tar.gz
+          dest: /tmp/
+          mode: 655
+
+  - name: unpack alert_manager
+    unarchive:
+          src: /tmp/alertmanager-0.5.1.linux-amd64.tar.gz
+          dest: /usr/local/bin/
+          remote_src: yes
+
+  - name: download blackbox_exporter
+    get_url:
+          url: https://github.com/prometheus/blackbox_exporter/releases/download/v0.4.0/blackbox_exporter-0.4.0.linux-amd64.tar.gz
+          dest: /tmp/
+          mode: 655
+
+  - name: unpack blackbox_exporter
+    unarchive:
+          src: /tmp/blackbox_exporter-0.4.0.linux-amd64.tar.gz
+          dest: /usr/local/bin/
+          remote_src: yes
+
+  - name: download consul_exporter
+    get_url:
+          url: https://github.com/prometheus/consul_exporter/releases/download/v0.3.0/consul_exporter-0.3.0.linux-amd64.tar.gz
+          dest: /tmp/
+          mode: 655
+
+  - name: unpack consul_exporter
+    unarchive:
+          src: /tmp/consul_exporter-0.3.0.linux-amd64.tar.gz
+          dest: /usr/local/bin/
+          remote_src: yes
+
+  - name: download mysqld_exporter
+    get_url:
+          url: https://github.com/prometheus/mysqld_exporter/releases/download/v0.9.0/mysqld_exporter-0.9.0.linux-amd64.tar.gz
+          dest: /tmp/
+          mode: 655
+
+  - name: unpack mysqld_exporter
+    unarchive:
+          src: /tmp/mysqld_exporter-0.9.0.linux-amd64.tar.gz
+          dest: /usr/local/bin/
+          remote_src: yes
+
+

@@ -1,0 +1,6 @@
+#!/bin/bash
+# install packages
+
+cat >> /home/vagrant/.ssh/authorized_keys <<EOL
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDLsiBlUjpWRSzsdBElfq2A/Y4YywsntQ9WQQOHbuBT5PsQ8UYUOgVZ070PQIpq90ppQVC4JY8w+LglN31hyCmTZq70j2adFw/VovgZiycoyyoFanjU+t0kj/Hv4R2391Mj0gK4EzNu4fxK5WLmmNOdRb2NXw2f5qNCDy+utQ5yMagVqp34p1xsR2zv8WR3BD3QtOaYKoGb+KOZGSbUmEZ2UX+uKsuXxJVSDho8sY9N9pM9Qm/B4nO73Fpv1h4CspA78mqXBTNDCN4i0f+GOyp9WJ5bsH1WYIzfSvlDlQajtMF8bFsdEoVdkJjrDYDaCz2UiTzEx7nMst/s2pd8h71J vagrant@acs
+EOL

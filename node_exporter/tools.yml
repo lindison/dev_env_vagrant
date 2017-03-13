@@ -1,0 +1,14 @@
+---
+- hosts: vagrant
+  remote_user: vagrant
+  become: yes
+  become_method: sudo 
+  gather_facts: no
+
+  tasks:
+  - name: install apache2 tools
+    apt: name=apache2-utils state=installed update_cache=yes
+
+  - name: install htop
+    apt: name=htop state=installed update_cache=yes
+
